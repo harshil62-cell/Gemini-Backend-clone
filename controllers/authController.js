@@ -95,8 +95,26 @@ const verifyOtp=asyncHandler(async(req,res)=>{
     });
 });
 
+//@desc Returns details about
+//currently authenticated user  
+//@route GET /auth/me 
+//@access private
+const getCurrentUser = asyncHandler(async (req, res) => {
+  const { id, mobile, name, subscriptionTier } = req.user;
+
+  res.status(200).json({
+    message:"User profile fetched successfully",
+    data:{
+    id,
+    mobile,
+    name,
+    subscriptionTier,
+    },
+  });
+});
+
 module.exports={
-    signup,sendOtp,verifyOtp
+    signup,sendOtp,verifyOtp,getCurrentUser
 }
 
 
