@@ -3,6 +3,7 @@ const prisma = new PrismaClient();
 const generateOtp = require('../utils/generateOtp');
 const asyncHandler=require('express-async-handler');
 const jwt=require('jsonwebtoken');
+const generateToken=require('../utils/jwt');
 
 //@desc Registers a new user with mobile number 
 //and optional info.
@@ -60,8 +61,42 @@ const sendOtp=asyncHandler(async(req,res)=>{
     res.status(200).json({message:"OTP sent",otp});
 });
 
+//@descVerifies the OTP and returns a JWT token 
+//for the session.  
+//@route POST /auth/verify-otp 
+//@access public
+const verifyOtp=asyncHandler(async(req,res)=>{
+    const{mobile,otp}=req.body;
+
+    if(!mobile || !otp){
+        res.status(400);
+        throw new Error("Mobile number and OTP not provided");
+    }
+
+    const user=await prisma.user.findUnique({where:{mobile}});
+
+    if(!user||user.otp!==otp){
+        res.status(400);
+        throw new Error("Invalid OTP or mobile number");
+    }
+
+    //clear the OTP field
+    await prisma.user.update({
+        where:{mobile},
+        data:{otp:null},
+    });
+
+    //generate jwt token
+    const token=generateToken(user.id);
+
+    res.status(200).json({
+        message:"OTP verified successfully",
+        token,
+    });
+});
+
 module.exports={
-    signup,sendOtp
+    signup,sendOtp,verifyOtp
 }
 
 
