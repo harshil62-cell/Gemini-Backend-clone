@@ -36,8 +36,32 @@ const signup=asyncHandler(async(req,res)=>{
     });
 });
 
+//@desc Sends an OTP to the user’s mobile 
+//number (mocked, returned in response). 
+//@route POST /auth/send-otp
+//@access public
+const sendOtp=asyncHandler(async(req,res)=>{
+    const{mobile}=req.body;
+    if(!mobile){
+        res.status(400);
+        throw new Error("Mobile number not provided");
+    }
+
+    const otp=generateOtp();
+
+    let user=await prisma.user.findUnique({where:{mobile}});
+    if(!user){
+        res.status(400);
+        throw new Error("User does not exist please signup first");
+    }else{
+        await prisma.user.update({where:{mobile},data:{otp}});
+    }
+
+    res.status(200).json({message:"OTP sent",otp});
+});
+
 module.exports={
-    signup,
+    signup,sendOtp
 }
 
 

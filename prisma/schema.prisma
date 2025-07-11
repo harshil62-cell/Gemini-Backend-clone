@@ -18,6 +18,7 @@ model User {
   name      String?
   mobile    String     @unique
   otp       String?
+  password  String?
   createdAt DateTime   @default(now())
   subscriptionTier String @default("Basic") // "Basic" or "Pro"
   chatrooms Chatroom[]
