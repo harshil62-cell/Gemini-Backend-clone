@@ -14,6 +14,7 @@ app.use(express.json());
 
 // Routes will go here
 app.get("/", (req, res) => res.send("Gemini Backend Running"));
+app.get('/success',(req,res)=>res.send("Payment success"));
 app.use('/auth',authRoutes);
 app.use('/user',userRoutes);
 app.use('/chatroom',chatroomRoutes);

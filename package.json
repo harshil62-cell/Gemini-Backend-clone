@@ -4,8 +4,9 @@
   "description": "This is a gemini-backend-clone made using external Gemini API free tier",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "start": "node index.js",
+  "dev": "nodemon index.js"
+},
   "author": "Harshil Vasani",
   "license": "ISC",
   "dependencies": {
@@ -20,6 +21,7 @@
     "express-async-handler": "^1.2.0",
     "ioredis": "^5.6.1",
     "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.1.10",
     "prisma": "^6.11.1",
     "stripe": "^18.3.0"
   }
