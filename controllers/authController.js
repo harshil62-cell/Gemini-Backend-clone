@@ -3,6 +3,7 @@ const prisma = new PrismaClient();
 const generateOtp = require('../utils/generateOtp');
 const asyncHandler=require('express-async-handler');
 const jwt=require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 const generateToken=require('../utils/jwt');
 
 //@desc Registers a new user with mobile number 
