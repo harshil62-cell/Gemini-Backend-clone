@@ -2,7 +2,7 @@
   "name": "gemini-backend-clone",
   "version": "1.0.0",
   "description": "This is a gemini-backend-clone made using external Gemini API free tier",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
   "start": "node index.js",
   "dev": "nodemon index.js"
