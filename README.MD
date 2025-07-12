@@ -156,15 +156,6 @@ npm start
 
 ---
 
-## 🔧 Pending Implementation
-
-- `POST /auth/forgot-password`
-- `POST /auth/change-password`
-
-These are documented above and will be implemented using mocked OTP verification.
-
----
-
 ## 👨‍💻 Author
 
 Built by [Harshil Vasani](https://github.com/harshilvasani)

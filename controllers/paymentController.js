@@ -3,7 +3,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const asyncHandler = require('express-async-handler');
-
+//initiate-payment
 const subscribePro = asyncHandler(async (req, res) => {
   const user = req.user;
 
@@ -26,7 +26,7 @@ const subscribePro = asyncHandler(async (req, res) => {
 
   res.status(200).json({ url: session.url });
 });
-
+//get status of payment
 const getSubscriptionStatus = asyncHandler(async (req, res) => {
   const user = await prisma.user.findUnique({
     where: { id: req.user.id },
