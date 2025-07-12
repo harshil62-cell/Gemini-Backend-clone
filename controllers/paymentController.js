@@ -17,8 +17,8 @@ const subscribePro = asyncHandler(async (req, res) => {
         quantity: 1,
       },
     ],
-    success_url: 'http://localhost:3000/success', // adjust for frontend
-    cancel_url: 'http://localhost:3000/cancel',
+    success_url: 'https://gemini-backend-clone.onrender.com/success',
+    cancel_url: 'https://gemini-backend-clone.onrender.com/cancel',
     metadata: {
       userId: user.id,
     },
