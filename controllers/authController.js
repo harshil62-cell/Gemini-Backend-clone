@@ -113,8 +113,73 @@ const getCurrentUser = asyncHandler(async (req, res) => {
   });
 });
 
+//@desc forgot password functionality  
+//@route POST /auth/forgot-password 
+//@access private
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { mobile } = req.body;
+
+  if (!mobile) {
+    res.status(400);
+    throw new Error("Mobile number is required");
+  }
+
+  const user = await prisma.user.findUnique({ where: { mobile } });
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  const otp = generateOtp();
+
+  await prisma.user.update({
+    where: { mobile },
+    data: { otp },
+  });
+
+  res.status(200).json({
+    message: "OTP sent for password reset",
+    otp, // mock return
+  });
+});
+
+
+//@desc change password functionality  
+//@route POST /auth/change-password 
+//@access private
+const changePassword = asyncHandler(async (req, res) => {
+  const { otp, newPassword } = req.body;
+
+  if (!otp || !newPassword) {
+    res.status(400);
+    throw new Error("OTP and new password are required");
+  }
+
+  const user = await prisma.user.findUnique({ where: { id: req.user.id } });
+  if (!user || user.otp !== otp) {
+    res.status(400);
+    throw new Error("Invalid OTP");
+  }
+
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+  await prisma.user.update({
+    where: { id: req.user.id },
+    data: {
+      password: hashedPassword,
+      otp: null, // reset OTP
+    },
+  });
+
+  res.status(200).json({
+    message: "Password updated successfully",
+  });
+});
+
+
+
 module.exports={
-    signup,sendOtp,verifyOtp,getCurrentUser
+    signup,sendOtp,verifyOtp,getCurrentUser,forgotPassword,changePassword
 }
 
 
