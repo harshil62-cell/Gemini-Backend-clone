@@ -1,5 +1,7 @@
 const Redis = require('ioredis');
-const redis = new Redis();
+const connection = new Redis(process.env.REDIS_URL, {
+  maxRetriesPerRequest: null,
+});
 
 (async () => {
   await redis.set('foo', 'bar');

@@ -7,7 +7,6 @@ require('dotenv').config();
 const prisma = new PrismaClient();
 const connection = new Redis(process.env.REDIS_URL, {
   maxRetriesPerRequest: null,
-  tls: {} // needed for `rediss://` secure connection
 });
 
 const ai = new GoogleGenAI(process.env.GEMINI_API_KEY);
