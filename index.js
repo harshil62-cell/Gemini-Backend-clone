@@ -7,7 +7,12 @@ const authRoutes=require('./routes/auth');
 const userRoutes=require('./routes/user');
 const chatroomRoutes=require('./routes/chatroom');
 const paymentRoutes=require('./routes/payment');
+//const setupSwagger = require('./swagger');
+const swaggerSpec = require('./swagger');
+const swaggerUi = require('swagger-ui-express');
 
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(cors());
 app.use('/webhook', express.raw({ type: 'application/json' }), require('./routes/webhook'));
 app.use(express.json());
