@@ -4,9 +4,9 @@
   "description": "This is a gemini-backend-clone made using external Gemini API free tier",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-  },
+  "start": "node index.js",
+  "dev": "nodemon index.js"
+},
   "author": "Harshil Vasani",
   "license": "ISC",
   "dependencies": {
@@ -23,8 +23,6 @@
     "jsonwebtoken": "^9.0.2",
     "nodemon": "^3.1.10",
     "prisma": "^6.11.1",
-    "stripe": "^18.3.0",
-    "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "stripe": "^18.3.0"
   }
 }
