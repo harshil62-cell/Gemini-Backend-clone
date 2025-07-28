@@ -81,8 +81,8 @@ npm start
 ## 🤖 Gemini API Integration
 
 - Uses `@google/generative-ai` npm package
-- Model used: `gemini-pro`
-- Returns streaming or text-based response
+- Model used: `gemini-2.5-flash`
+- Returns text-based response
 - Free tier supports a limited number of requests
 
 ---
